@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-size: 18px;
+  padding: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+ol {
+  margin: 1.5em 0 0 3em;;
+}
+
+ol > li {
+  padding-top: 0.5em;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active, a:visited, a:link {
+  color: black;
+}
+
+a:hover {
+  color: #9E9E9E;
+}
+
+#button {
+  cursor: pointer;
+  display: inline-block;
+  background-color: lightgrey;
+  padding: 0.5em 1em;
+  user-select: none;
+}
+
+#body {
+  height: 130vh;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "rxjs-workshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "rxjs": "^5.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "http-server": "^0.9.0",
+    "json-server": "^0.9.6",
+    "npm-run-all": "^4.0.2",
+    "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm-run-all --parallel webpack http-server api",
+    "webpack": "webpack -w",
+    "http-server": "http-server",
+    "api": "json-server ./4_from_promise/db/db.json -d 2000"
+  },
+  "author": "Lehel Vass",
+  "license": "ISC"
+}
