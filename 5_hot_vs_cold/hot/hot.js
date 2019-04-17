@@ -1,46 +1,33 @@
-'use strict';
+import { timer, Subject } from 'rxjs';
+import { take, share } from 'rxjs/operators';
 
-class DataSource {
-  constructor() {
-    let counter = 0;
-    this.tID = setInterval(() => this.emit(counter++), 500);
-  }
+// Warm Observable. Starts emiting only when there is a Subscriber, but the stream is shared between subscribers
+// const stream$ = timer(0, 1000).pipe(
+//   take(6),
+//   share()
+// );
 
-  emit(n) {
-    const limit = 10;
-    if (this.ondata) {
-      this.ondata(n);
-    }
+// setTimeout(() => {
+//   stream$.subscribe(v => console.log(`First subscriber: ${v}`));
+// }, 3500);
 
-    if (n === limit) {
-      if (this.oncomplete) {
-        this.oncomplete();
-      }
-      this.destroy();
-    }
-  }
+// setTimeout(() => {
+//   stream$.subscribe(v => console.log(`Second subscriber: ${v}`));
+// }, 5000);
 
-  destroy() {
-    clearInterval(this.tID);
-  }
-}
-
-let dataSource = new DataSource();
-
-function coldObservable(observer) {
-  dataSource.ondata = (e) => observer.next(e);
-  dataSource.onerror = (err) => observer.error(err);
-  dataSource.oncomplete = () => observer.complete();
-
-  return () => {
-    dataSource.destroy();
-  }
-}
-
+// Hot Observable
+const subject = new Subject();
+const source$ = subject.asObservable().pipe(take(6));
+let counter = 0;
 setInterval(() => {
-  const subscription = coldObservable({
-    next(val) { console.log(val) },
-    error(err) { console.log(err) },
-    complete() { console.log('completed') }
-  })
-}, 1500);
+  subject.next(counter);
+  counter += 1;
+}, 1000);
+
+setTimeout(() => {
+  source$.subscribe(v => console.log(`First subscriber: ${v}`));
+}, 3500);
+
+setTimeout(() => {
+  source$.subscribe(v => console.log(`Second subscriber: ${v}`));
+}, 5000);

@@ -1,43 +1,12 @@
-'use strict';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-class DataSource {
-  constructor() {
-    let counter = 0;
-    this.tID = setInterval(() => this.emit(counter++), 500);
-  }
+const stream$ = timer(1000, 1000).pipe(take(6));
 
-  emit(n) {
-    const limit = 10;
-    if (this.ondata) {
-      this.ondata(n);
-    }
+setTimeout(() => {
+  stream$.subscribe(v => console.log(`First subscriber: ${v}`));
+}, 1500);
 
-    if (n === limit) {
-      if (this.oncomplete) {
-        this.oncomplete();
-      }
-      this.destroy();
-    }
-  }
-
-  destroy() {
-    clearInterval(this.tID);
-  }
-}
-
-function coldObservable(observer) {
-  let dataSource = new DataSource();
-  dataSource.ondata = (e) => observer.next(e);
-  dataSource.onerror = (err) => observer.error(err);
-  dataSource.oncomplete = () => observer.complete();
-
-  return () => {
-    dataSource.destroy();
-  }
-}
-
-const subscription = coldObservable({
-  next(val) { console.log(val) },
-  error(err) { console.log(err) },
-  complete() { console.log('completed') }
-});
+setTimeout(() => {
+  stream$.subscribe(v => console.log(`Second subscriber: ${v}`));
+}, 2000);

@@ -7,7 +7,7 @@ ReactiveX is a library for composing asynchronous and event-based programs by us
 **Reactive programming**
 
 > In computing, reactive programming is a programming paradigm oriented around data flows and the propagation of change.
-[Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)
+> [Wikipedia](https://en.wikipedia.org/wiki/Reactive_programming)
 
 An **Observable** is like an array - in time.
 
@@ -15,11 +15,13 @@ An **Observable** is like an array - in time.
 
 A representation of any set of values over any amount of time. This is the most basic building block of RxJS
 
-Characteristics
-* are lazy (cold vs hot)
-* non-blocking
-* accepts observers
-* made for async
-* best for handling events too
-* composable
-* functional(ish)
+**Observables**
+
+- declarative
+- are lazy (cold vs hot)
+- non-blocking
+- accepts observers
+- made for async
+- best for handling events too
+- composable
+- functional(ish)

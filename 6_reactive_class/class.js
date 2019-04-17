@@ -1,5 +1,5 @@
-'use strict';
-import Rx from 'rxjs/Rx';
+import { map } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
 
 // Create an Observer Class
 class Post {
@@ -7,7 +7,7 @@ class Post {
 
   next(post) {
     this.post = post;
-    console.log(`Hello ${this.post.author}!`)
+    console.log(`Hello ${this.post.author}!`);
   }
 
   error(err) {
@@ -15,12 +15,13 @@ class Post {
   }
 
   complete() {
-    console.log('Ajax call completed')
+    console.log('Ajax call completed');
   }
 }
 
 // Subscribe the class to an observable
-Rx.Observable
-  .ajax('http://localhost:3000/posts/1')
-  .map(res => res.response)
+ajax('http://localhost:3000/posts/1')
+  .pipe(map(res => res.response))
   .subscribe(new Post());
+
+// https://stackblitz.com/edit/rxjs-reactive-class-ts?file=index.ts
