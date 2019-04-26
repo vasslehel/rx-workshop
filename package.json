@@ -20,7 +20,7 @@
     "start": "npm-run-all --parallel webpack http-server api",
     "webpack": "webpack -w",
     "http-server": "http-server -c-1",
-    "api": "json-server ./4_from_promise/db/db.json -d 2000"
+    "api": "json-server ./3_from_promise/db/db.json -d 2000"
   },
   "author": "Lehel Vass",
   "license": "ISC"
