@@ -1,6 +1,6 @@
 'use strict';
 import { fromEvent, merge } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, repeat, switchMapTo } from 'rxjs/operators';
 
 const body = document.getElementById('body');
 const button = document.getElementById('button');
@@ -19,3 +19,18 @@ const combined$ = merge(scroll$, mouseMove$).pipe(takeUntil(click$));
 // mouseMove$.subscribe(ev => console.log(`X: ${ev.clientX} \nY: ${ev.clientY}`));
 
 combined$.subscribe(val => console.log(val));
+
+// Drag example
+// const mouseDown$ = fromEvent(button, 'mousedown');
+// const mouseUp$ = fromEvent(document, 'mouseup');
+
+// mouseDown$
+//   .pipe(
+//     switchMapTo(mouseMove$),
+//     takeUntil(mouseUp$),
+//     repeat()
+//   )
+//   .subscribe(e => {
+//     button.style.top = e.clientY + 'px';
+//     button.style.left = e.clientX + 'px';
+//   });
